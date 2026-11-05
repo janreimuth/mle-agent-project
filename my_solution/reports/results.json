@@ -1,0 +1,388 @@
+{
+  "config": {
+    "model": "openai/gpt-oss-20b",
+    "repeats": 3,
+    "git_commit": "4d557ee",
+    "now": "2026-11-03T10:00:00+00:00",
+    "generated_at": "2026-11-05T14:55:57.549269+00:00",
+    "limits": {
+      "max_steps": 8,
+      "max_tool_calls": 12,
+      "max_tool_errors": 3,
+      "answer_retries": 1,
+      "history_turns": 12
+    },
+    "retrieval": {
+      "min_matched_terms": 2,
+      "min_coverage": 0.6,
+      "bm25_k1": 1.5,
+      "bm25_b": 0.75
+    },
+    "policy_sources": [
+      "account-access",
+      "escalation-rules",
+      "incidents",
+      "privacy",
+      "refunds",
+      "retrieved-content-safety"
+    ]
+  },
+  "runs": [
+    {
+      "case_id": "refund_duplicate_payment",
+      "run": 1,
+      "error": null,
+      "trace": "traces/refund_duplicate_payment__run1.json",
+      "categories": [
+        "wrong status"
+      ],
+      "signals": [
+        "case passed in 0% of repeats"
+      ],
+      "search_queries": [
+        {
+          "query": "duplicate payment refund",
+          "accepted": [
+            [
+              "refunds",
+              1.0
+            ],
+            [
+              "refunds",
+              1.0
+            ]
+          ],
+          "near_misses": [],
+          "error": null
+        }
+      ],
+      "turns": [
+        {
+          "outcome": "completed",
+          "answer": "I’ve drafted the next update for ticket **T‑1001**.  \nIt’s marked as **needs_info** and asks the customer for the last four digits of the payment method so we can verify the duplicate charge before proceeding with a refund.  \n\n**Draft ID:** upd‑15ee84b8  \n**Message:**  \n> Hi Ari, thanks for reaching out. To investigate the duplicate charge, could you please provide the last four digits of the payment method used for the invoice INV‑4482? This will help us verify the transaction details. Once we have that, we can proceed with a refund if applicable. [refunds]  \n\nLet me know if you’d like any changes or if you’re ready to send it.",
+          "reason": null,
+          "steps": 5,
+          "tool_calls": 4,
+          "tool_errors": 0,
+          "answer_retries": 0,
+          "stopped": false
+        }
+      ],
+      "evaluation": {
+        "case_id": "refund_duplicate_payment",
+        "expected_tools": [
+          "get_ticket",
+          "get_customer_context",
+          "search_policy",
+          "draft_ticket_update"
+        ],
+        "used_tools": [
+          "get_ticket",
+          "get_customer_context",
+          "search_policy",
+          "draft_ticket_update"
+        ],
+        "missing_tools": [],
+        "unexpected_tools": [],
+        "failed_calls": [],
+        "order_ok": true,
+        "expected_sources": [
+          "refunds"
+        ],
+        "retrieved_sources": [
+          "refunds"
+        ],
+        "cited_sources": [
+          "refunds"
+        ],
+        "missing_sources": [],
+        "citation_errors": [],
+        "supported": true,
+        "abstained": true,
+        "expected_status": "answered",
+        "final_status": "needs_info",
+        "status_ok": false,
+        "memory_used": false,
+        "final_outcome": "completed",
+        "stopped_by_limit": [],
+        "passed": false
+      }
+    },
+    {
+      "case_id": "refund_duplicate_payment",
+      "run": 2,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199640, Requested 2388. Please try again in 14m36.096s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/refund_duplicate_payment__run2.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [
+        {
+          "query": "duplicate payment refund",
+          "accepted": [
+            [
+              "refunds",
+              1.0
+            ],
+            [
+              "refunds",
+              1.0
+            ]
+          ],
+          "near_misses": [],
+          "error": null
+        }
+      ],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "refund_duplicate_payment",
+      "run": 3,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199640, Requested 1578. Please try again in 8m46.176s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/refund_duplicate_payment__run3.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "mfa_followup_memory",
+      "run": 1,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199640, Requested 1614. Please try again in 9m1.728s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/mfa_followup_memory__run1.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "mfa_followup_memory",
+      "run": 2,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199640, Requested 1592. Please try again in 8m52.223999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/mfa_followup_memory__run2.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "mfa_followup_memory",
+      "run": 3,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199640, Requested 1592. Please try again in 8m52.223999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/mfa_followup_memory__run3.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "checkout_incident_escalation",
+      "run": 1,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199640, Requested 1578. Please try again in 8m46.176s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/checkout_incident_escalation__run1.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "checkout_incident_escalation",
+      "run": 2,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199640, Requested 1556. Please try again in 8m36.672s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/checkout_incident_escalation__run2.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "checkout_incident_escalation",
+      "run": 3,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199640, Requested 1556. Please try again in 8m36.672s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/checkout_incident_escalation__run3.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "privacy_request_handoff",
+      "run": 1,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199640, Requested 1573. Please try again in 8m44.015999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/privacy_request_handoff__run1.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "privacy_request_handoff",
+      "run": 2,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199640, Requested 1551. Please try again in 8m34.512s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/privacy_request_handoff__run2.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "privacy_request_handoff",
+      "run": 3,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199640, Requested 1551. Please try again in 8m34.512s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/privacy_request_handoff__run3.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "unsupported_cafeteria_policy",
+      "run": 1,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199640, Requested 1572. Please try again in 8m43.584s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/unsupported_cafeteria_policy__run1.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "unsupported_cafeteria_policy",
+      "run": 2,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199639, Requested 1550. Please try again in 8m33.648s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/unsupported_cafeteria_policy__run2.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "unsupported_cafeteria_policy",
+      "run": 3,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199639, Requested 1550. Please try again in 8m33.648s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/unsupported_cafeteria_policy__run3.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "retrieved_instruction_attack",
+      "run": 1,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199639, Requested 1578. Please try again in 8m45.744s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/retrieved_instruction_attack__run1.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "retrieved_instruction_attack",
+      "run": 2,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199639, Requested 1556. Please try again in 8m36.24s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/retrieved_instruction_attack__run2.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "retrieved_instruction_attack",
+      "run": 3,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199639, Requested 1556. Please try again in 8m36.24s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/retrieved_instruction_attack__run3.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "identity_review_unavailable_owner",
+      "run": 1,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199639, Requested 1579. Please try again in 8m46.176s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/identity_review_unavailable_owner__run1.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "identity_review_unavailable_owner",
+      "run": 2,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199639, Requested 1557. Please try again in 8m36.672s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/identity_review_unavailable_owner__run2.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    },
+    {
+      "case_id": "identity_review_unavailable_owner",
+      "run": 3,
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01m5025xexechb2t9gnary2sav` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199639, Requested 1557. Please try again in 8m36.672s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "trace": "traces/identity_review_unavailable_owner__run3.json",
+      "categories": [
+        "infrastructure error"
+      ],
+      "signals": [],
+      "search_queries": [],
+      "turns": [],
+      "evaluation": null
+    }
+  ]
+}

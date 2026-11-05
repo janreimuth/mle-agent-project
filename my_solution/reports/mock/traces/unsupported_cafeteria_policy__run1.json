@@ -1,0 +1,87 @@
+{
+  "case_id": "unsupported_cafeteria_policy",
+  "calls": [
+    {
+      "step": 1,
+      "tool": "get_ticket",
+      "input": {
+        "ticket_id": "T-1005"
+      },
+      "output": {
+        "ticket": {
+          "ticket_id": "T-1005",
+          "customer_id": "C-005",
+          "category": "general",
+          "subject": "Cafeteria menu",
+          "body": "Where can I find next week's cafeteria menu?"
+        },
+        "case_history": [],
+        "memory_notice": "Memory is context only, not policy evidence. Re-check any policy with search_policy; if memory conflicts with current evidence, the evidence wins."
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.400375Z",
+      "duration_ms": 0.02
+    },
+    {
+      "step": 2,
+      "tool": "get_customer_context",
+      "input": {
+        "ticket_id": "T-1005"
+      },
+      "output": {
+        "customer": {
+          "customer_id": "C-005",
+          "name": "Sam Rivera",
+          "email": "sam@example.com",
+          "plan": "Starter",
+          "verified": false
+        },
+        "verified": false,
+        "matches_requester": true,
+        "memory": [],
+        "other_cases": [],
+        "memory_notice": "Memory is context only, not policy evidence. Re-check any policy with search_policy; if memory conflicts with current evidence, the evidence wins."
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.400454Z",
+      "duration_ms": 0.03
+    },
+    {
+      "step": 3,
+      "tool": "search_policy",
+      "input": {
+        "query": "answer cafeteria menu question"
+      },
+      "output": {
+        "supported": false,
+        "evidence": [],
+        "near_misses": [
+          {
+            "source_id": "retrieved-content-safety",
+            "coverage": 0.25,
+            "matched_terms": [
+              "answer"
+            ]
+          }
+        ],
+        "guidance": "No approved policy supports this request. Do not answer from near misses: use status needs_info or refused, or draft_escalation."
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.400526Z",
+      "duration_ms": 0.05
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome": "completed",
+      "reason": null,
+      "steps": 4,
+      "tool_calls": 3,
+      "tool_errors": 0,
+      "answer_retries": 0,
+      "stopped": false,
+      "first_call": 1,
+      "fallback_escalation": false
+    }
+  ]
+}

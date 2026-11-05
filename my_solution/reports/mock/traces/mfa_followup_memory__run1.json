@@ -1,0 +1,67 @@
+{
+  "case_id": "mfa_followup_memory",
+  "calls": [
+    {
+      "step": 1,
+      "tool": "search_policy",
+      "input": {
+        "query": "account acces mfa"
+      },
+      "output": {
+        "supported": true,
+        "evidence": [
+          {
+            "evidence_id": "account-access#1",
+            "source_id": "account-access",
+            "title": "Account Access And MFA",
+            "text": "If the account owner cannot be verified, the case must be escalated for human identity review. The assistant must not disable MFA directly.",
+            "score": 4.826,
+            "coverage": 0.67,
+            "matched_terms": [
+              "account",
+              "mfa"
+            ]
+          },
+          {
+            "evidence_id": "account-access#0",
+            "source_id": "account-access",
+            "title": "Account Access And MFA",
+            "text": "For multi-factor authentication lockouts, support should verify the customer email, confirm the account owner, and check whether backup codes were already issued. The assistant may draft a reset checklist only after customer context matches the ticket requester.",
+            "score": 3.329,
+            "coverage": 0.67,
+            "matched_terms": [
+              "account",
+              "mfa"
+            ]
+          }
+        ],
+        "near_misses": [
+          {
+            "source_id": "privacy",
+            "coverage": 0.33,
+            "matched_terms": [
+              "account"
+            ]
+          }
+        ],
+        "guidance": "Answer only from this evidence and cite it, e.g. [account-access]."
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.386812Z",
+      "duration_ms": 0.6
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome": "completed",
+      "reason": null,
+      "steps": 2,
+      "tool_calls": 1,
+      "tool_errors": 0,
+      "answer_retries": 0,
+      "stopped": false,
+      "first_call": 1,
+      "fallback_escalation": false
+    }
+  ]
+}

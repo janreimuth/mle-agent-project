@@ -1,0 +1,225 @@
+{
+  "case_id": "privacy_request_handoff",
+  "calls": [
+    {
+      "step": 1,
+      "tool": "get_ticket",
+      "input": {
+        "ticket_id": "T-1004"
+      },
+      "output": {
+        "ticket": {
+          "ticket_id": "T-1004",
+          "customer_id": "C-004",
+          "category": "privacy",
+          "subject": "Delete my account data",
+          "body": "Please delete all data for lina@example.com before the end of the month."
+        },
+        "case_history": [],
+        "memory_notice": "Memory is context only, not policy evidence. Re-check any policy with search_policy; if memory conflicts with current evidence, the evidence wins."
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.396307Z",
+      "duration_ms": 0.03
+    },
+    {
+      "step": 2,
+      "tool": "get_customer_context",
+      "input": {
+        "ticket_id": "T-1004"
+      },
+      "output": {
+        "customer": {
+          "customer_id": "C-004",
+          "name": "Lina Novak",
+          "email": "lina@example.com",
+          "plan": "Professional",
+          "verified": true
+        },
+        "verified": true,
+        "matches_requester": true,
+        "memory": [],
+        "other_cases": [],
+        "memory_notice": "Memory is context only, not policy evidence. Re-check any policy with search_policy; if memory conflicts with current evidence, the evidence wins."
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.396397Z",
+      "duration_ms": 0.04
+    },
+    {
+      "step": 3,
+      "tool": "search_policy",
+      "input": {
+        "query": "privacy data request"
+      },
+      "output": {
+        "supported": true,
+        "evidence": [
+          {
+            "evidence_id": "privacy#0",
+            "source_id": "privacy",
+            "title": "Privacy And Data Requests",
+            "text": "Data deletion and export requests must be routed to the privacy queue. Support may acknowledge the request, collect the account email, and explain that the privacy team will verify identity before acting. The assistant must not claim that data was deleted.",
+            "score": 6.124,
+            "coverage": 1.0,
+            "matched_terms": [
+              "data",
+              "privacy",
+              "request"
+            ]
+          },
+          {
+            "evidence_id": "privacy#1",
+            "source_id": "privacy",
+            "title": "Privacy And Data Requests",
+            "text": "Privacy requests should include the customer ID, requester email, request type, and any deadline stated by the requester.",
+            "score": 5.908,
+            "coverage": 1.0,
+            "matched_terms": [
+              "data",
+              "privacy",
+              "request"
+            ]
+          },
+          {
+            "evidence_id": "escalation-rules#0",
+            "source_id": "escalation-rules",
+            "title": "Escalation Rules",
+            "text": "Escalate when a request requires identity review, finance approval, privacy processing, production incident response, or an exception to a written policy. Escalation drafts should name the responsible queue, include the ticket ID, and list the evidence that triggered the handoff.",
+            "score": 2.301,
+            "coverage": 0.67,
+            "matched_terms": [
+              "privacy",
+              "request"
+            ]
+          }
+        ],
+        "near_misses": [
+          {
+            "source_id": "refunds",
+            "coverage": 0.33,
+            "matched_terms": [
+              "request"
+            ]
+          },
+          {
+            "source_id": "retrieved-content-safety",
+            "coverage": 0.33,
+            "matched_terms": [
+              "data"
+            ]
+          }
+        ],
+        "guidance": "Answer only from this evidence and cite it, e.g. [privacy]."
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.396470Z",
+      "duration_ms": 0.1
+    },
+    {
+      "step": 4,
+      "tool": "search_policy",
+      "input": {
+        "query": "escalation rule"
+      },
+      "output": {
+        "supported": true,
+        "evidence": [
+          {
+            "evidence_id": "escalation-rules#1",
+            "source_id": "escalation-rules",
+            "title": "Escalation Rules",
+            "text": "If policy evidence is missing or contradictory, the assistant should return a review-required outcome instead of inventing the next step.",
+            "score": 3.823,
+            "coverage": 1.0,
+            "matched_terms": [
+              "escalation",
+              "rule"
+            ]
+          },
+          {
+            "evidence_id": "escalation-rules#0",
+            "source_id": "escalation-rules",
+            "title": "Escalation Rules",
+            "text": "Escalate when a request requires identity review, finance approval, privacy processing, production incident response, or an exception to a written policy. Escalation drafts should name the responsible queue, include the ticket ID, and list the evidence that triggered the handoff.",
+            "score": 3.427,
+            "coverage": 1.0,
+            "matched_terms": [
+              "escalation",
+              "rule"
+            ]
+          }
+        ],
+        "near_misses": [
+          {
+            "source_id": "incidents",
+            "coverage": 0.5,
+            "matched_terms": [
+              "escalation"
+            ]
+          }
+        ],
+        "guidance": "Answer only from this evidence and cite it, e.g. [escalation-rules]."
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.396613Z",
+      "duration_ms": 0.05
+    },
+    {
+      "step": 5,
+      "tool": "check_availability",
+      "input": {
+        "team": "privacy"
+      },
+      "output": {
+        "team": "privacy",
+        "at": "2026-11-03T10:00:00Z",
+        "available": false,
+        "on_call": null
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.396706Z",
+      "duration_ms": 0.02
+    },
+    {
+      "step": 6,
+      "tool": "draft_escalation",
+      "input": {
+        "ticket_id": "T-1004",
+        "team": "privacy",
+        "reason": "Needs a human per policy [privacy] [escalation-rules]",
+        "summary": "Delete my account data"
+      },
+      "output": {
+        "draft_id": "esc-02df0173",
+        "ticket_id": "T-1004",
+        "team": "privacy",
+        "priority": "normal",
+        "assignee": null,
+        "reason": "Needs a human per policy [privacy] [escalation-rules]",
+        "summary": "Delete my account data",
+        "cited_sources": [
+          "privacy",
+          "escalation-rules"
+        ],
+        "created_at": "2026-11-03T10:00:00Z"
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.396755Z",
+      "duration_ms": 0.07
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome": "escalated",
+      "reason": null,
+      "steps": 6,
+      "tool_calls": 6,
+      "tool_errors": 0,
+      "answer_retries": 0,
+      "stopped": false,
+      "first_call": 1,
+      "fallback_escalation": false
+    }
+  ]
+}

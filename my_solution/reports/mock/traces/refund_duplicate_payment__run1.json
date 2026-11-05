@@ -1,0 +1,128 @@
+{
+  "case_id": "refund_duplicate_payment",
+  "calls": [
+    {
+      "step": 1,
+      "tool": "get_ticket",
+      "input": {
+        "ticket_id": "T-1001"
+      },
+      "output": {
+        "ticket": {
+          "ticket_id": "T-1001",
+          "customer_id": "C-001",
+          "category": "billing",
+          "subject": "Duplicate workshop payment",
+          "body": "I was charged twice for invoice INV-4482. Payment references are PAY-88A and PAY-88B. Can you refund the duplicate?"
+        },
+        "case_history": [],
+        "memory_notice": "Memory is context only, not policy evidence. Re-check any policy with search_policy; if memory conflicts with current evidence, the evidence wins."
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.381335Z",
+      "duration_ms": 0.04
+    },
+    {
+      "step": 2,
+      "tool": "get_customer_context",
+      "input": {
+        "ticket_id": "T-1001"
+      },
+      "output": {
+        "customer": {
+          "customer_id": "C-001",
+          "name": "Ari Patel",
+          "email": "ari@example.com",
+          "plan": "Professional",
+          "verified": true
+        },
+        "verified": true,
+        "matches_requester": true,
+        "memory": [],
+        "other_cases": [],
+        "memory_notice": "Memory is context only, not policy evidence. Re-check any policy with search_policy; if memory conflicts with current evidence, the evidence wins."
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.381493Z",
+      "duration_ms": 0.05
+    },
+    {
+      "step": 3,
+      "tool": "search_policy",
+      "input": {
+        "query": "refund duplicate payment"
+      },
+      "output": {
+        "supported": true,
+        "evidence": [
+          {
+            "evidence_id": "refunds#0",
+            "source_id": "refunds",
+            "title": "Refunds And Duplicate Payments",
+            "text": "Refund requests must be checked against the original payment record before an agent promises a resolution. For duplicate payments, support should ask for the invoice number, payment reference, and the last four digits of the payment method. If the duplicate charge is visible in the payment record, support may draft a refund ticket update and mark the case for finance review.",
+            "score": 7.865,
+            "coverage": 1.0,
+            "matched_terms": [
+              "duplicate",
+              "payment",
+              "refund"
+            ]
+          },
+          {
+            "evidence_id": "refunds#1",
+            "source_id": "refunds",
+            "title": "Refunds And Duplicate Payments",
+            "text": "Refunds for cancelled workshops are eligible only when the cancellation was made at least seven days before the workshop date. Exceptional refunds require human review and must not be promised by the assistant.",
+            "score": 6.31,
+            "coverage": 1.0,
+            "matched_terms": [
+              "duplicate",
+              "payment",
+              "refund"
+            ]
+          }
+        ],
+        "near_misses": [],
+        "guidance": "Answer only from this evidence and cite it, e.g. [refunds]."
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.381617Z",
+      "duration_ms": 0.1
+    },
+    {
+      "step": 4,
+      "tool": "draft_ticket_update",
+      "input": {
+        "ticket_id": "T-1001",
+        "status": "answered",
+        "message": "Update on your request [refunds]."
+      },
+      "output": {
+        "draft_id": "upd-40e7ecd7",
+        "ticket_id": "T-1001",
+        "status": "answered",
+        "message": "Update on your request [refunds].",
+        "cited_sources": [
+          "refunds"
+        ],
+        "created_at": "2026-11-03T10:00:00Z"
+      },
+      "error": null,
+      "started_at": "2026-11-05T15:05:04.381770Z",
+      "duration_ms": 0.11
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome": "completed",
+      "reason": null,
+      "steps": 5,
+      "tool_calls": 4,
+      "tool_errors": 0,
+      "answer_retries": 0,
+      "stopped": false,
+      "first_call": 1,
+      "fallback_escalation": false
+    }
+  ]
+}

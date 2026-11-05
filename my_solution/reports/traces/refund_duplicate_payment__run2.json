@@ -1,0 +1,117 @@
+{
+  "case_id": "refund_duplicate_payment",
+  "calls": [
+    {
+      "step": 1,
+      "tool": "get_ticket",
+      "input": {
+        "ticket_id": "T-1001"
+      },
+      "output": {
+        "ticket": {
+          "ticket_id": "T-1001",
+          "customer_id": "C-001",
+          "category": "billing",
+          "subject": "Duplicate workshop payment",
+          "body": "I was charged twice for invoice INV-4482. Payment references are PAY-88A and PAY-88B. Can you refund the duplicate?"
+        },
+        "case_history": [],
+        "memory_notice": "Memory is context only, not policy evidence. Re-check any policy with search_policy; if memory conflicts with current evidence, the evidence wins."
+      },
+      "error": null,
+      "started_at": "2026-11-05T14:55:27.969657Z",
+      "duration_ms": 0.07
+    },
+    {
+      "step": 2,
+      "tool": "get_customer_context",
+      "input": {
+        "ticket_id": "T-1001"
+      },
+      "output": {
+        "customer": {
+          "customer_id": "C-001",
+          "name": "Ari Patel",
+          "email": "ari@example.com",
+          "plan": "Professional",
+          "verified": true
+        },
+        "verified": true,
+        "matches_requester": true,
+        "memory": [],
+        "other_cases": [],
+        "memory_notice": "Memory is context only, not policy evidence. Re-check any policy with search_policy; if memory conflicts with current evidence, the evidence wins."
+      },
+      "error": null,
+      "started_at": "2026-11-05T14:55:34.765413Z",
+      "duration_ms": 0.08
+    },
+    {
+      "step": 3,
+      "tool": "search_policy",
+      "input": {
+        "query": "duplicate payment refund",
+        "top_k": 3
+      },
+      "output": {
+        "supported": true,
+        "evidence": [
+          {
+            "evidence_id": "refunds#0",
+            "source_id": "refunds",
+            "title": "Refunds And Duplicate Payments",
+            "text": "Refund requests must be checked against the original payment record before an agent promises a resolution. For duplicate payments, support should ask for the invoice number, payment reference, and the last four digits of the payment method. If the duplicate charge is visible in the payment record, support may draft a refund ticket update and mark the case for finance review.",
+            "score": 7.865,
+            "coverage": 1.0,
+            "matched_terms": [
+              "duplicate",
+              "payment",
+              "refund"
+            ]
+          },
+          {
+            "evidence_id": "refunds#1",
+            "source_id": "refunds",
+            "title": "Refunds And Duplicate Payments",
+            "text": "Refunds for cancelled workshops are eligible only when the cancellation was made at least seven days before the workshop date. Exceptional refunds require human review and must not be promised by the assistant.",
+            "score": 6.31,
+            "coverage": 1.0,
+            "matched_terms": [
+              "duplicate",
+              "payment",
+              "refund"
+            ]
+          }
+        ],
+        "near_misses": [],
+        "guidance": "Answer only from this evidence and cite it, e.g. [refunds]."
+      },
+      "error": null,
+      "started_at": "2026-11-05T14:55:47.418451Z",
+      "duration_ms": 0.11
+    },
+    {
+      "step": 4,
+      "tool": "draft_ticket_update",
+      "input": {
+        "message": "Hi Ari, thanks for reaching out. To investigate the duplicate charge, could you please provide the last four digits of the payment method used for the invoice INV-4482? This will help us verify the transaction details. Once we have that, we can proceed with a refund if applicable. [refunds]",
+        "status": "needs_info",
+        "ticket_id": "T-1001"
+      },
+      "output": {
+        "draft_id": "upd-9d7181c5",
+        "ticket_id": "T-1001",
+        "status": "needs_info",
+        "message": "Hi Ari, thanks for reaching out. To investigate the duplicate charge, could you please provide the last four digits of the payment method used for the invoice INV-4482? This will help us verify the transaction details. Once we have that, we can proceed with a refund if applicable. [refunds]",
+        "cited_sources": [
+          "refunds"
+        ],
+        "created_at": "2026-11-03T10:00:00Z"
+      },
+      "error": null,
+      "started_at": "2026-11-05T14:55:56.806677Z",
+      "duration_ms": 0.18
+    }
+  ],
+  "outcomes": []
+}

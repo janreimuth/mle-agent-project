@@ -1,0 +1,14 @@
+{
+  "entries": [
+    {
+      "ticket_id": "T-1001",
+      "customer_id": "C-001",
+      "kind": "ticket_update",
+      "summary": "Hi Ari,\n\nThanks for reaching out. To investigate the duplicate charge, could you please provide the last four digits of the card used for the payment? Once we have that, we’ll review the payment records and coordinate with finance to process a refund if applicable.\n\nThank you for your patience.\n\nBest regards,\nSupport Team",
+      "status": "needs_info",
+      "previously_cited": [],
+      "created_at": "2026-11-05T13:41:42.693424Z",
+      "session_id": "84afe8d7"
+    }
+  ]
+}
